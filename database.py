@@ -65,6 +65,15 @@ V2_SENT_FLAGS = (
     "f7_sent",
 )
 
+import os
+
+# Legacy 30min/1h/3h follow-ups only go to users who joined within this window.
+LEGACY_FOLLOW_UP_MAX_AGE_HOURS = int(os.getenv("LEGACY_FOLLOW_UP_MAX_AGE_HOURS", "24"))
+
+# After this many "hasn't started bot" failures, the v2 scheduler skips the user
+# until they interact with the bot again.
+PEER_INVALID_SKIP_THRESHOLD = 3
+
 V2_TIMESTAMP_FIELDS = (
     "broker_link_tapped_at",
     "account_created_at",
@@ -153,20 +162,23 @@ def get_users_for_follow_up(follow_up_type, minutes_ago):
     field = f"follow_up_{follow_up_type}_sent"
     timestamp_field = f"follow_up_{follow_up_type}_sent_at"
     
+    # Anti-spam: never resend the same follow-up within 24 hours
+    recent_cutoff = datetime.now(utc) - timedelta(hours=24)
+
+    # Don't send "30 min / 1 h / 3 h" reminders to people who joined long ago
+    max_age_cutoff = datetime.now(utc) - timedelta(hours=LEGACY_FOLLOW_UP_MAX_AGE_HOURS)
+
     # Base query with timestamp-based duplicate prevention
     query = {
-        "created_at": {"$lte": cutoff_time},
+        "created_at": {"$lte": cutoff_time, "$gte": max_age_cutoff},
         field: {"$ne": True},  # Has not been sent
-        timestamp_field: {"$eq": None},  # No timestamp recorded
-        "setup_completed": {"$ne": True}  # Setup not completed
+        # FIX: `$or` is not a field operator in MongoDB ("unknown operator: $or").
+        # `$not: {$gte: X}` matches null, missing, OR older than X — same intent.
+        timestamp_field: {"$not": {"$gte": recent_cutoff}},
+        "setup_completed": {"$ne": True},  # Setup not completed
+        # Legacy job is for legacy users only — v2 users have their own F1–F7 flow
+        "v2_eligible": {"$ne": True},
     }
-    
-    # Additional anti-spam: prevent sending same follow-up within 24 hours even if marked false
-    recent_cutoff = datetime.now(utc) - timedelta(hours=24)
-    query[timestamp_field] = {"$or": [
-        {"$eq": None},  # Never sent
-        {"$lt": recent_cutoff}  # Sent more than 24 hours ago
-    ]}
     
     # Sequential follow-up enforcement
     if follow_up_type == "30min":
@@ -338,7 +350,45 @@ def get_active_v2_users():
             {"support_contacted_at": None},
             {"support_contacted_at": {"$exists": False}},
         ],
+        # Skip users who blocked the bot / deleted their account
+        "unreachable_at": None,
+        # Skip users who repeatedly "haven't started the bot"
+        "peer_invalid_count": {"$not": {"$gte": PEER_INVALID_SKIP_THRESHOLD}},
     })
+
+
+def mark_unreachable(user_id, reason):
+    """User blocked the bot or deleted their account — stop scheduling for them."""
+    return onboarding.update_one(
+        {"user_id": str(user_id)},
+        {"$set": {"unreachable_at": _now(), "unreachable_reason": reason}},
+    )
+
+
+def record_peer_invalid(user_id):
+    """User hasn't started the bot (or peer not cached). Counted, not final."""
+    return onboarding.update_one(
+        {"user_id": str(user_id)},
+        {"$inc": {"peer_invalid_count": 1}, "$set": {"peer_invalid_at": _now()}},
+    )
+
+
+def clear_unreachable(user_id):
+    """User interacted with the bot — make them reachable again.
+    Filter only matches flagged docs, so for normal users this writes nothing."""
+    return onboarding.update_one(
+        {
+            "user_id": str(user_id),
+            "$or": [
+                {"unreachable_at": {"$ne": None}},
+                {"peer_invalid_count": {"$gt": 0}},
+            ],
+        },
+        {
+            "$set": {"unreachable_at": None, "unreachable_reason": None,
+                     "peer_invalid_count": 0},
+        },
+    )
 
 
 def migrate_to_v2_schema():

@@ -23,6 +23,7 @@ from database import (
     set_chosen_mode, set_account_created, set_funded, set_support_contacted,
     set_do_later, mark_v2_message_sent, admin_activate, get_active_v2_users,
     migrate_to_v2_schema, set_v2_eligible,
+    mark_unreachable, record_peer_invalid, clear_unreachable,
 )
 from configs import cfg
 
@@ -722,6 +723,17 @@ def _fmt(template, **kwargs):
         return template
 
 
+def _flag_unreachable(user_id, reason):
+    """Record a delivery failure so the v2 scheduler stops retrying dead users."""
+    try:
+        if reason == "not_started":
+            record_peer_invalid(user_id)
+        else:
+            mark_unreachable(user_id, reason)
+    except Exception as e:
+        logger.error(f"Could not flag {user_id} as {reason}: {e}")
+
+
 async def _send(user_id, text, reply_markup=None):
     try:
         await rate_limited_send(
@@ -730,8 +742,13 @@ async def _send(user_id, text, reply_markup=None):
         )
     except errors.PeerIdInvalid:
         logger.warning(f"Cannot send to {user_id}: user hasn't started bot")
+        _flag_unreachable(user_id, "not_started")
     except errors.UserIsBlocked:
-        logger.warning(f"User {user_id} blocked the bot")
+        logger.warning(f"User {user_id} blocked the bot — skipping from now on")
+        _flag_unreachable(user_id, "blocked")
+    except errors.InputUserDeactivated:
+        logger.warning(f"User {user_id} deleted their account — skipping from now on")
+        _flag_unreachable(user_id, "deactivated")
     except Exception as e:
         logger.error(f"Send to {user_id} failed: {e}")
 
@@ -752,8 +769,13 @@ async def _send_photo(user_id, photo_path, caption=None, reply_markup=None):
         )
     except errors.PeerIdInvalid:
         logger.warning(f"Cannot send photo to {user_id}: user hasn't started bot")
+        _flag_unreachable(user_id, "not_started")
     except errors.UserIsBlocked:
-        logger.warning(f"User {user_id} blocked the bot")
+        logger.warning(f"User {user_id} blocked the bot — skipping from now on")
+        _flag_unreachable(user_id, "blocked")
+    except errors.InputUserDeactivated:
+        logger.warning(f"User {user_id} deleted their account — skipping from now on")
+        _flag_unreachable(user_id, "deactivated")
     except Exception as e:
         logger.error(f"Send photo to {user_id} failed: {e}")
         # Best-effort fallback so the flow doesn't dead-end
@@ -1277,8 +1299,31 @@ async def process_follow_ups():
             
         logger.info(f"Follow-up cycle completed. Sent {total_sent} messages.")
             
-    except Exception as e:
-        logger.error(f"Error processing follow-ups: {e}")
+    except Exception:
+        # logger.exception prints the full traceback (file + line) so the
+        # next DB error is easy to trace.
+        logger.exception("Error processing follow-ups")
+
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Reachability reset ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# group=-1 runs BEFORE the normal handlers and does not stop them, so /start,
+# button presses etc. still work exactly as before.
+@app.on_message(filters.private & filters.incoming, group=-1)
+async def _mark_reachable_on_message(_, m: Message):
+    if m.from_user:
+        try:
+            clear_unreachable(m.from_user.id)
+        except Exception as e:
+            logger.error(f"clear_unreachable failed for {m.from_user.id}: {e}")
+
+
+@app.on_callback_query(group=-1)
+async def _mark_reachable_on_callback(_, q: CallbackQuery):
+    if q.from_user:
+        try:
+            clear_unreachable(q.from_user.id)
+        except Exception as e:
+            logger.error(f"clear_unreachable failed for {q.from_user.id}: {e}")
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Main process ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
