@@ -1,0 +1,792 @@
+[
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "Message",
+        "importPath": "pyrogram.types",
+        "description": "pyrogram.types",
+        "isExtraImport": true,
+        "detail": "pyrogram.types",
+        "documentation": {}
+    },
+    {
+        "label": "InlineKeyboardButton",
+        "importPath": "pyrogram.types",
+        "description": "pyrogram.types",
+        "isExtraImport": true,
+        "detail": "pyrogram.types",
+        "documentation": {}
+    },
+    {
+        "label": "InlineKeyboardMarkup",
+        "importPath": "pyrogram.types",
+        "description": "pyrogram.types",
+        "isExtraImport": true,
+        "detail": "pyrogram.types",
+        "documentation": {}
+    },
+    {
+        "label": "CallbackQuery",
+        "importPath": "pyrogram.types",
+        "description": "pyrogram.types",
+        "isExtraImport": true,
+        "detail": "pyrogram.types",
+        "documentation": {}
+    },
+    {
+        "label": "filters",
+        "importPath": "pyrogram",
+        "description": "pyrogram",
+        "isExtraImport": true,
+        "detail": "pyrogram",
+        "documentation": {}
+    },
+    {
+        "label": "Client",
+        "importPath": "pyrogram",
+        "description": "pyrogram",
+        "isExtraImport": true,
+        "detail": "pyrogram",
+        "documentation": {}
+    },
+    {
+        "label": "errors",
+        "importPath": "pyrogram",
+        "description": "pyrogram",
+        "isExtraImport": true,
+        "detail": "pyrogram",
+        "documentation": {}
+    },
+    {
+        "label": "enums",
+        "importPath": "pyrogram",
+        "description": "pyrogram",
+        "isExtraImport": true,
+        "detail": "pyrogram",
+        "documentation": {}
+    },
+    {
+        "label": "UserNotParticipant",
+        "importPath": "pyrogram.errors",
+        "description": "pyrogram.errors",
+        "isExtraImport": true,
+        "detail": "pyrogram.errors",
+        "documentation": {}
+    },
+    {
+        "label": "FloodWait",
+        "importPath": "pyrogram.errors",
+        "description": "pyrogram.errors",
+        "isExtraImport": true,
+        "detail": "pyrogram.errors",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncIOScheduler",
+        "importPath": "apscheduler.schedulers.asyncio",
+        "description": "apscheduler.schedulers.asyncio",
+        "isExtraImport": true,
+        "detail": "apscheduler.schedulers.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "IntervalTrigger",
+        "importPath": "apscheduler.triggers.interval",
+        "description": "apscheduler.triggers.interval",
+        "isExtraImport": true,
+        "detail": "apscheduler.triggers.interval",
+        "documentation": {}
+    },
+    {
+        "label": "pytz",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pytz",
+        "description": "pytz",
+        "detail": "pytz",
+        "documentation": {}
+    },
+    {
+        "label": "add_user",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "add_group",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "all_users",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "all_groups",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "users",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "remove_user",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "add_onboarding_user",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "get_onboarding_user",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "update_onboarding_stage",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "mark_follow_up_sent",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "mark_setup_completed",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "mark_account_verified",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "get_users_for_follow_up",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "is_user_in_onboarding",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "already_onboarding",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "reset_onboarding",
+        "importPath": "database",
+        "description": "database",
+        "isExtraImport": true,
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "cfg",
+        "importPath": "configs",
+        "description": "configs",
+        "isExtraImport": true,
+        "detail": "configs",
+        "documentation": {}
+    },
+    {
+        "label": "cfg",
+        "importPath": "configs",
+        "description": "configs",
+        "isExtraImport": true,
+        "detail": "configs",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "os.path",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os.path",
+        "description": "os.path",
+        "detail": "os.path",
+        "documentation": {}
+    },
+    {
+        "label": "pkgutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pkgutil",
+        "description": "pkgutil",
+        "detail": "pkgutil",
+        "documentation": {}
+    },
+    {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
+        "documentation": {}
+    },
+    {
+        "label": "tempfile",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tempfile",
+        "description": "tempfile",
+        "detail": "tempfile",
+        "documentation": {}
+    },
+    {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "importlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "importlib",
+        "description": "importlib",
+        "detail": "importlib",
+        "documentation": {}
+    },
+    {
+        "label": "b85decode",
+        "importPath": "base64",
+        "description": "base64",
+        "isExtraImport": true,
+        "detail": "base64",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "logger = logging.getLogger(__name__)\n# Create unique session name for different environments\nsession_name = f\"graceboy_bot_{os.getenv('RAILWAY_ENVIRONMENT', 'local')}_{hash(cfg.BOT_TOKEN) % 10000}\"\n# Ensure sessions directory exists and is writable\nimport os\nsessions_dir = \"/tmp/sessions\"\nos.makedirs(sessions_dir, exist_ok=True)\n# Initialize bot client with improved connection settings\napp = Client(\n    session_name,",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "session_name",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "session_name = f\"graceboy_bot_{os.getenv('RAILWAY_ENVIRONMENT', 'local')}_{hash(cfg.BOT_TOKEN) % 10000}\"\n# Ensure sessions directory exists and is writable\nimport os\nsessions_dir = \"/tmp/sessions\"\nos.makedirs(sessions_dir, exist_ok=True)\n# Initialize bot client with improved connection settings\napp = Client(\n    session_name,\n    api_id=cfg.API_ID,\n    api_hash=cfg.API_HASH,",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "sessions_dir",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "sessions_dir = \"/tmp/sessions\"\nos.makedirs(sessions_dir, exist_ok=True)\n# Initialize bot client with improved connection settings\napp = Client(\n    session_name,\n    api_id=cfg.API_ID,\n    api_hash=cfg.API_HASH,\n    bot_token=cfg.BOT_TOKEN,\n    workers=25,  # Reduced workers to prevent overwhelming connections\n    sleep_threshold=60,  # Shorter sleep threshold",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "app = Client(\n    session_name,\n    api_id=cfg.API_ID,\n    api_hash=cfg.API_HASH,\n    bot_token=cfg.BOT_TOKEN,\n    workers=25,  # Reduced workers to prevent overwhelming connections\n    sleep_threshold=60,  # Shorter sleep threshold\n    workdir=sessions_dir,  # Store session files in /tmp\n    in_memory=False,  # Use persistent sessions\n    max_concurrent_transmissions=10  # Limit concurrent transmissions",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "scheduler",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "scheduler = AsyncIOScheduler()\n# Rate limiting for API calls\nlast_api_call = {}\nAPI_CALL_DELAY = 1.0  # Minimum delay between API calls\nasync def rate_limited_send(func, *args, **kwargs):\n    \"\"\"Apply rate limiting to API calls with exponential backoff\"\"\"\n    current_time = time.time()\n    if 'last_call' not in rate_limited_send.__dict__:\n        rate_limited_send.last_call = 0\n    time_since_last = current_time - rate_limited_send.last_call",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "last_api_call",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "last_api_call = {}\nAPI_CALL_DELAY = 1.0  # Minimum delay between API calls\nasync def rate_limited_send(func, *args, **kwargs):\n    \"\"\"Apply rate limiting to API calls with exponential backoff\"\"\"\n    current_time = time.time()\n    if 'last_call' not in rate_limited_send.__dict__:\n        rate_limited_send.last_call = 0\n    time_since_last = current_time - rate_limited_send.last_call\n    if time_since_last < API_CALL_DELAY:\n        await asyncio.sleep(API_CALL_DELAY - time_since_last)",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "API_CALL_DELAY",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "API_CALL_DELAY = 1.0  # Minimum delay between API calls\nasync def rate_limited_send(func, *args, **kwargs):\n    \"\"\"Apply rate limiting to API calls with exponential backoff\"\"\"\n    current_time = time.time()\n    if 'last_call' not in rate_limited_send.__dict__:\n        rate_limited_send.last_call = 0\n    time_since_last = current_time - rate_limited_send.last_call\n    if time_since_last < API_CALL_DELAY:\n        await asyncio.sleep(API_CALL_DELAY - time_since_last)\n    max_retries = 5",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "kind": 6,
+        "importPath": "configs",
+        "description": "configs",
+        "peekOfCode": "class Config:\n    def __init__(self):\n        # Load JSON configuration first\n        self._load_json_config()\n        # Load environment variables (required)\n        self._load_env_config()\n    def _load_json_config(self):\n        \"\"\"Load configuration from JSON file\"\"\"\n        config_file = Path(\"config.json\")\n        if config_file.exists():",
+        "detail": "configs",
+        "documentation": {}
+    },
+    {
+        "label": "cfg",
+        "kind": 5,
+        "importPath": "configs",
+        "description": "configs",
+        "peekOfCode": "cfg = Config()\ncfg.validate()",
+        "detail": "configs",
+        "documentation": {}
+    },
+    {
+        "label": "already_db",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def already_db(user_id):\n        user = users.find_one({\"user_id\" : str(user_id)})\n        if not user:\n            return False\n        return True\ndef already_dbg(chat_id):\n        group = groups.find_one({\"chat_id\" : str(chat_id)})\n        if not group:\n            return False\n        return True",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "already_dbg",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def already_dbg(chat_id):\n        group = groups.find_one({\"chat_id\" : str(chat_id)})\n        if not group:\n            return False\n        return True\ndef add_user(user_id):\n    in_db = already_db(user_id)\n    if in_db:\n        return\n    return users.insert_one({\"user_id\": str(user_id)}) ",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "add_user",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def add_user(user_id):\n    in_db = already_db(user_id)\n    if in_db:\n        return\n    return users.insert_one({\"user_id\": str(user_id)}) \ndef remove_user(user_id):\n    in_db = already_db(user_id)\n    if not in_db:\n        return \n    return users.delete_one({\"user_id\": str(user_id)})",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "remove_user",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def remove_user(user_id):\n    in_db = already_db(user_id)\n    if not in_db:\n        return \n    return users.delete_one({\"user_id\": str(user_id)})\ndef add_group(chat_id):\n    in_db = already_dbg(chat_id)\n    if in_db:\n        return\n    return groups.insert_one({\"chat_id\": str(chat_id)})",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "add_group",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def add_group(chat_id):\n    in_db = already_dbg(chat_id)\n    if in_db:\n        return\n    return groups.insert_one({\"chat_id\": str(chat_id)})\ndef all_users():\n    user = users.find({})\n    usrs = len(list(user))\n    return usrs\ndef all_groups():",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "all_users",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def all_users():\n    user = users.find({})\n    usrs = len(list(user))\n    return usrs\ndef all_groups():\n    group = groups.find({})\n    grps = len(list(group))\n    return grps\n# Onboarding functions\ndef add_onboarding_user(user_id, first_name):",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "all_groups",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def all_groups():\n    group = groups.find({})\n    grps = len(list(group))\n    return grps\n# Onboarding functions\ndef add_onboarding_user(user_id, first_name):\n    \"\"\"Add user to onboarding tracking with their first name\"\"\"\n    utc = pytz.UTC\n    now = datetime.now(utc)\n    return onboarding.insert_one({",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "add_onboarding_user",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def add_onboarding_user(user_id, first_name):\n    \"\"\"Add user to onboarding tracking with their first name\"\"\"\n    utc = pytz.UTC\n    now = datetime.now(utc)\n    return onboarding.insert_one({\n        \"user_id\": str(user_id),\n        \"first_name\": first_name,\n        \"onboarding_stage\": \"welcome_sent\",\n        \"created_at\": now,\n        \"follow_up_30min_sent\": False,",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "get_onboarding_user",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def get_onboarding_user(user_id):\n    \"\"\"Get onboarding data for a user\"\"\"\n    return onboarding.find_one({\"user_id\": str(user_id)})\ndef update_onboarding_stage(user_id, stage):\n    \"\"\"Update user's onboarding stage\"\"\"\n    return onboarding.update_one(\n        {\"user_id\": str(user_id)},\n        {\"$set\": {\"onboarding_stage\": stage}}\n    )\ndef mark_follow_up_sent(user_id, follow_up_type):",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "update_onboarding_stage",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def update_onboarding_stage(user_id, stage):\n    \"\"\"Update user's onboarding stage\"\"\"\n    return onboarding.update_one(\n        {\"user_id\": str(user_id)},\n        {\"$set\": {\"onboarding_stage\": stage}}\n    )\ndef mark_follow_up_sent(user_id, follow_up_type):\n    \"\"\"Mark a follow-up as sent with timestamp\"\"\"\n    utc = pytz.UTC\n    now = datetime.now(utc)",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "mark_follow_up_sent",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def mark_follow_up_sent(user_id, follow_up_type):\n    \"\"\"Mark a follow-up as sent with timestamp\"\"\"\n    utc = pytz.UTC\n    now = datetime.now(utc)\n    field = f\"follow_up_{follow_up_type}_sent\"\n    timestamp_field = f\"follow_up_{follow_up_type}_sent_at\"\n    return onboarding.update_one(\n        {\"user_id\": str(user_id)},\n        {\"$set\": {\n            field: True,",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "mark_setup_completed",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def mark_setup_completed(user_id, completed=True):\n    \"\"\"Mark user's setup as completed\"\"\"\n    return onboarding.update_one(\n        {\"user_id\": str(user_id)},\n        {\"$set\": {\"setup_completed\": completed}}\n    )\ndef mark_account_verified(user_id, verified=True):\n    \"\"\"Mark user's account as verified\"\"\"\n    return onboarding.update_one(\n        {\"user_id\": str(user_id)},",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "mark_account_verified",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def mark_account_verified(user_id, verified=True):\n    \"\"\"Mark user's account as verified\"\"\"\n    return onboarding.update_one(\n        {\"user_id\": str(user_id)},\n        {\"$set\": {\"account_verified\": verified}}\n    )\ndef get_users_for_follow_up(follow_up_type, minutes_ago):\n    \"\"\"Get users who need follow-up messages with timestamp-based anti-spam filtering\"\"\"\n    utc = pytz.UTC\n    cutoff_time = datetime.now(utc) - timedelta(minutes=minutes_ago)",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "get_users_for_follow_up",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def get_users_for_follow_up(follow_up_type, minutes_ago):\n    \"\"\"Get users who need follow-up messages with timestamp-based anti-spam filtering\"\"\"\n    utc = pytz.UTC\n    cutoff_time = datetime.now(utc) - timedelta(minutes=minutes_ago)\n    field = f\"follow_up_{follow_up_type}_sent\"\n    timestamp_field = f\"follow_up_{follow_up_type}_sent_at\"\n    # Base query with timestamp-based duplicate prevention\n    query = {\n        \"created_at\": {\"$lte\": cutoff_time},\n        field: {\"$ne\": True},  # Has not been sent",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "migrate_existing_users",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def migrate_existing_users():\n    \"\"\"Add timestamp fields to existing users who don't have them\"\"\"\n    try:\n        # Find users missing timestamp fields\n        users_to_update = onboarding.find({\n            \"$or\": [\n                {\"follow_up_30min_sent_at\": {\"$exists\": False}},\n                {\"follow_up_1h_sent_at\": {\"$exists\": False}},\n                {\"follow_up_3h_sent_at\": {\"$exists\": False}}\n            ]",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "is_user_in_onboarding",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def is_user_in_onboarding(user_id):\n    \"\"\"Check if user is in onboarding process\"\"\"\n    user = onboarding.find_one({\"user_id\": str(user_id)})\n    return user is not None\ndef already_onboarding(user_id):\n    \"\"\"Check if user already has onboarding record\"\"\"\n    return onboarding.find_one({\"user_id\": str(user_id)}) is not None\ndef reset_onboarding(user_id):\n    \"\"\"Reset onboarding for a user (delete existing record)\"\"\"\n    return onboarding.delete_one({\"user_id\": str(user_id)})",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "already_onboarding",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def already_onboarding(user_id):\n    \"\"\"Check if user already has onboarding record\"\"\"\n    return onboarding.find_one({\"user_id\": str(user_id)}) is not None\ndef reset_onboarding(user_id):\n    \"\"\"Reset onboarding for a user (delete existing record)\"\"\"\n    return onboarding.delete_one({\"user_id\": str(user_id)})",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "reset_onboarding",
+        "kind": 2,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "def reset_onboarding(user_id):\n    \"\"\"Reset onboarding for a user (delete existing record)\"\"\"\n    return onboarding.delete_one({\"user_id\": str(user_id)})",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "client = MongoClient(cfg.MONGO_URI)\nusers = client[cfg.DB_NAME]['users']\ngroups = client[cfg.DB_NAME]['groups']\nonboarding = client[cfg.DB_NAME]['onboarding']\ndef already_db(user_id):\n        user = users.find_one({\"user_id\" : str(user_id)})\n        if not user:\n            return False\n        return True\ndef already_dbg(chat_id):",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "users",
+        "kind": 5,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "users = client[cfg.DB_NAME]['users']\ngroups = client[cfg.DB_NAME]['groups']\nonboarding = client[cfg.DB_NAME]['onboarding']\ndef already_db(user_id):\n        user = users.find_one({\"user_id\" : str(user_id)})\n        if not user:\n            return False\n        return True\ndef already_dbg(chat_id):\n        group = groups.find_one({\"chat_id\" : str(chat_id)})",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "groups",
+        "kind": 5,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "groups = client[cfg.DB_NAME]['groups']\nonboarding = client[cfg.DB_NAME]['onboarding']\ndef already_db(user_id):\n        user = users.find_one({\"user_id\" : str(user_id)})\n        if not user:\n            return False\n        return True\ndef already_dbg(chat_id):\n        group = groups.find_one({\"chat_id\" : str(chat_id)})\n        if not group:",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "onboarding",
+        "kind": 5,
+        "importPath": "database",
+        "description": "database",
+        "peekOfCode": "onboarding = client[cfg.DB_NAME]['onboarding']\ndef already_db(user_id):\n        user = users.find_one({\"user_id\" : str(user_id)})\n        if not user:\n            return False\n        return True\ndef already_dbg(chat_id):\n        group = groups.find_one({\"chat_id\" : str(chat_id)})\n        if not group:\n            return False",
+        "detail": "database",
+        "documentation": {}
+    },
+    {
+        "label": "include_setuptools",
+        "kind": 2,
+        "importPath": "get-pip",
+        "description": "get-pip",
+        "peekOfCode": "def include_setuptools(args):\n    \"\"\"\n    Install setuptools only if absent, not excluded and when using Python <3.12.\n    \"\"\"\n    cli = not args.no_setuptools\n    env = not os.environ.get(\"PIP_NO_SETUPTOOLS\")\n    absent = not importlib.util.find_spec(\"setuptools\")\n    python_lt_3_12 = this_python < (3, 12)\n    return cli and env and absent and python_lt_3_12\ndef include_wheel(args):",
+        "detail": "get-pip",
+        "documentation": {}
+    },
+    {
+        "label": "include_wheel",
+        "kind": 2,
+        "importPath": "get-pip",
+        "description": "get-pip",
+        "peekOfCode": "def include_wheel(args):\n    \"\"\"\n    Install wheel only if absent, not excluded and when using Python <3.12.\n    \"\"\"\n    cli = not args.no_wheel\n    env = not os.environ.get(\"PIP_NO_WHEEL\")\n    absent = not importlib.util.find_spec(\"wheel\")\n    python_lt_3_12 = this_python < (3, 12)\n    return cli and env and absent and python_lt_3_12\ndef determine_pip_install_arguments():",
+        "detail": "get-pip",
+        "documentation": {}
+    },
+    {
+        "label": "determine_pip_install_arguments",
+        "kind": 2,
+        "importPath": "get-pip",
+        "description": "get-pip",
+        "peekOfCode": "def determine_pip_install_arguments():\n    pre_parser = argparse.ArgumentParser()\n    pre_parser.add_argument(\"--no-setuptools\", action=\"store_true\")\n    pre_parser.add_argument(\"--no-wheel\", action=\"store_true\")\n    pre, args = pre_parser.parse_known_args()\n    args.append(\"pip\")\n    if include_setuptools(pre):\n        args.append(\"setuptools\")\n    if include_wheel(pre):\n        args.append(\"wheel\")",
+        "detail": "get-pip",
+        "documentation": {}
+    },
+    {
+        "label": "monkeypatch_for_cert",
+        "kind": 2,
+        "importPath": "get-pip",
+        "description": "get-pip",
+        "peekOfCode": "def monkeypatch_for_cert(tmpdir):\n    \"\"\"Patches `pip install` to provide default certificate with the lowest priority.\n    This ensures that the bundled certificates are used unless the user specifies a\n    custom cert via any of pip's option passing mechanisms (config, env-var, CLI).\n    A monkeypatch is the easiest way to achieve this, without messing too much with\n    the rest of pip's internals.\n    \"\"\"\n    from pip._internal.commands.install import InstallCommand\n    # We want to be using the internal certificates.\n    cert_path = os.path.join(tmpdir, \"cacert.pem\")",
+        "detail": "get-pip",
+        "documentation": {}
+    },
+    {
+        "label": "bootstrap",
+        "kind": 2,
+        "importPath": "get-pip",
+        "description": "get-pip",
+        "peekOfCode": "def bootstrap(tmpdir):\n    monkeypatch_for_cert(tmpdir)\n    # Execute the included pip and use it to install the latest pip and\n    # any user-requested packages from PyPI.\n    from pip._internal.cli.main import main as pip_entry_point\n    args = determine_pip_install_arguments()\n    sys.exit(pip_entry_point(args))\ndef main():\n    tmpdir = None\n    try:",
+        "detail": "get-pip",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "get-pip",
+        "description": "get-pip",
+        "peekOfCode": "def main():\n    tmpdir = None\n    try:\n        # Create a temporary working directory\n        tmpdir = tempfile.mkdtemp()\n        # Unpack the zipfile into the temporary directory\n        pip_zip = os.path.join(tmpdir, \"pip.zip\")\n        with open(pip_zip, \"wb\") as fp:\n            fp.write(b85decode(DATA.replace(b\"\\n\", b\"\")))\n        # Add the zipfile to sys.path so that we can import it",
+        "detail": "get-pip",
+        "documentation": {}
+    },
+    {
+        "label": "this_python",
+        "kind": 5,
+        "importPath": "get-pip",
+        "description": "get-pip",
+        "peekOfCode": "this_python = sys.version_info[:2]\nmin_version = (3, 9)\nif this_python < min_version:\n    message_parts = [\n        \"This script does not work on Python {}.{}.\".format(*this_python),\n        \"The minimum supported Python version is {}.{}.\".format(*min_version),\n        \"Please use https://bootstrap.pypa.io/pip/{}.{}/get-pip.py instead.\".format(*this_python),\n    ]\n    print(\"ERROR: \" + \" \".join(message_parts))\n    sys.exit(1)",
+        "detail": "get-pip",
+        "documentation": {}
+    },
+    {
+        "label": "min_version",
+        "kind": 5,
+        "importPath": "get-pip",
+        "description": "get-pip",
+        "peekOfCode": "min_version = (3, 9)\nif this_python < min_version:\n    message_parts = [\n        \"This script does not work on Python {}.{}.\".format(*this_python),\n        \"The minimum supported Python version is {}.{}.\".format(*min_version),\n        \"Please use https://bootstrap.pypa.io/pip/{}.{}/get-pip.py instead.\".format(*this_python),\n    ]\n    print(\"ERROR: \" + \" \".join(message_parts))\n    sys.exit(1)\nimport os.path",
+        "detail": "get-pip",
+        "documentation": {}
+    },
+    {
+        "label": "DATA",
+        "kind": 5,
+        "importPath": "get-pip",
+        "description": "get-pip",
+        "peekOfCode": "DATA = b\"\"\"\nP)h>@6aWAK2mnTQqFMrZI-~di003nH000jF003}la4%n9X>MtBUtcb8c|B0UO2j}6z0X&KUUXrdvZA;\na6ubz6s0VM$QfAw<4YV^ulDhQoop$MlK*;0e<?$L01LzdVw?IP-tnf*qTlkJj!Mom=viw7qw3H>hKz9\nFVcXpQ<V`^+*aO7_tw^Cd$4zs{Pl#j>6{|X*AaQ6!2wJ?w>%d+2&1X4Rc!^r6h-hMtH_<n)`omXfA!z\nc)+2_nTCfpGRv1uvmTkcug)ShEPeC#tJ!y1a)P)ln~75Jc!yqZE1Gl6K?CR$<8F6kVP)a}pU*@~4OAy\n<MFxvzbFl3|p@5?5Ii7qF0_`NT{r7m1lM_B44a9>d5{IF3D`nKTt~p1QY-O00;m^cA{Eu_pjHy0RRA2\n0{{RI0001RX>c!JUu|J&ZeL$6aCu!)OK;mS48HqU5b43r;JP^vOMxACEp{6QLy+m1h%E`C9MAjpBNe-\n8r;{H19{ebpf{zJ27j)n8%0=-6Z#elILRo@w9oRWWbO{z8ujDS!QAC@3T%nJCf;1rX6ghzu#Z}<GSE4\n4EG}J&ngovyJ$%DCh>R@K&*?Hgj1WFD91+adaM4G`4Xs@*hA^t@nbDYdL)-aOjsW~3}QVVby(8=@7U$\nFzj5Y{w!2hUUH`?e9j7WDA;>-1aos>7j{2$~BfyL8p@__Y98dsP#Bs7^<X<wp+-f{6%mc1~N!0T>lWF",
+        "detail": "get-pip",
+        "documentation": {}
+    }
+]

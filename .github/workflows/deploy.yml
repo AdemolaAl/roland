@@ -1,0 +1,52 @@
+name: Deploy
+
+# Deploys to the client's Railway project via a scoped project token.
+# Auto-deploy stays OFF until the repo variable DEPLOY_ENABLED is set to
+# "true" — set it once this app has been cut over and the OLD Railway
+# service has been disconnected from GitHub, so a push doesn't deploy to
+# both accounts at once. Until then use "Run workflow" for a manual deploy.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Decide whether to deploy
+        id: guard
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          elif [ "${{ vars.DEPLOY_ENABLED }}" = "true" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Auto-deploy off. Set repo variable DEPLOY_ENABLED=true to enable."
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.guard.outputs.run == 'true'
+
+      # Pipe to bash, not sh: the installer is bash-only and dies with
+      # "Bad substitution" under dash. It installs to ~/.railway/bin,
+      # which is not on PATH by default.
+      - name: Install Railway CLI
+        if: steps.guard.outputs.run == 'true'
+        run: |
+          curl -fsSL https://railway.com/install.sh | bash
+          echo "$HOME/.railway/bin" >> "$GITHUB_PATH"
+
+      # The build runs on Railway (rootDirectory=/backend is set on the
+      # service). No --detach, so a failed build fails this workflow
+      # rather than going green.
+      - name: Deploy to Railway
+        if: steps.guard.outputs.run == 'true'
+        run: railway up --service roland-bot
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
