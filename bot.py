@@ -22,8 +22,7 @@ from database import (
     # Roland v2
     set_chosen_mode, set_account_created, set_funded, set_support_contacted,
     set_do_later, mark_v2_message_sent, admin_activate, get_active_v2_users,
-    migrate_to_v2_schema, set_v2_eligible,
-    mark_unreachable, record_peer_invalid, clear_unreachable,
+    migrate_to_v2_schema, set_v2_eligible, set_unreachable,
 )
 from configs import cfg
 
@@ -723,34 +722,26 @@ def _fmt(template, **kwargs):
         return template
 
 
-def _flag_unreachable(user_id, reason):
-    """Record a delivery failure so the v2 scheduler stops retrying dead users."""
-    try:
-        if reason == "not_started":
-            record_peer_invalid(user_id)
-        else:
-            mark_unreachable(user_id, reason)
-    except Exception as e:
-        logger.error(f"Could not flag {user_id} as {reason}: {e}")
-
-
 async def _send(user_id, text, reply_markup=None):
+    """Returns True if the message was delivered."""
     try:
         await rate_limited_send(
             app.send_message, user_id, text,
             reply_markup=reply_markup, disable_web_page_preview=True,
         )
+        return True
     except errors.PeerIdInvalid:
         logger.warning(f"Cannot send to {user_id}: user hasn't started bot")
-        _flag_unreachable(user_id, "not_started")
+        set_unreachable(user_id)
     except errors.UserIsBlocked:
-        logger.warning(f"User {user_id} blocked the bot — skipping from now on")
-        _flag_unreachable(user_id, "blocked")
+        logger.warning(f"User {user_id} blocked the bot")
+        set_unreachable(user_id)
     except errors.InputUserDeactivated:
-        logger.warning(f"User {user_id} deleted their account — skipping from now on")
-        _flag_unreachable(user_id, "deactivated")
+        logger.warning(f"User {user_id} deleted their account")
+        set_unreachable(user_id)
     except Exception as e:
         logger.error(f"Send to {user_id} failed: {e}")
+    return False
 
 
 async def _send_photo(user_id, photo_path, caption=None, reply_markup=None):
@@ -760,27 +751,29 @@ async def _send_photo(user_id, photo_path, caption=None, reply_markup=None):
     if not photo_path or not os.path.exists(photo_path):
         logger.warning(f"Photo missing at {photo_path!r}, falling back to text-only")
         if caption:
-            await _send(user_id, caption, reply_markup=reply_markup)
-        return
+            return await _send(user_id, caption, reply_markup=reply_markup)
+        return False
     try:
         await rate_limited_send(
             app.send_photo, user_id, photo=photo_path,
             caption=caption, reply_markup=reply_markup,
         )
+        return True
     except errors.PeerIdInvalid:
         logger.warning(f"Cannot send photo to {user_id}: user hasn't started bot")
-        _flag_unreachable(user_id, "not_started")
+        set_unreachable(user_id)
     except errors.UserIsBlocked:
-        logger.warning(f"User {user_id} blocked the bot — skipping from now on")
-        _flag_unreachable(user_id, "blocked")
+        logger.warning(f"User {user_id} blocked the bot")
+        set_unreachable(user_id)
     except errors.InputUserDeactivated:
-        logger.warning(f"User {user_id} deleted their account — skipping from now on")
-        _flag_unreachable(user_id, "deactivated")
+        logger.warning(f"User {user_id} deleted their account")
+        set_unreachable(user_id)
     except Exception as e:
         logger.error(f"Send photo to {user_id} failed: {e}")
         # Best-effort fallback so the flow doesn't dead-end
         if caption:
-            await _send(user_id, caption, reply_markup=reply_markup)
+            return await _send(user_id, caption, reply_markup=reply_markup)
+    return False
 
 
 async def send_m2_reveal(user_id, first_name):
@@ -1095,11 +1088,11 @@ def should_send_f7(u, now):
 async def _send_v2_and_mark(user_id, msg_type, text, keyboard):
     """Mark sent first to avoid duplicates if send is slow; send second."""
     mark_v2_message_sent(user_id, msg_type)
-    await _send(user_id, text, keyboard)
+    return await _send(user_id, text, keyboard)
 
 
 async def send_stuck_step_1_msg(u):
-    await _send_v2_and_mark(
+    return await _send_v2_and_mark(
         int(u["user_id"]), "stuck_step_1",
         _fmt(cfg.STUCK_STEP_1, first_name=u.get("first_name") or "Friend"),
         kb_stuck_step_1(),
@@ -1107,7 +1100,7 @@ async def send_stuck_step_1_msg(u):
 
 
 async def send_stuck_step_2_msg(u):
-    await _send_v2_and_mark(
+    return await _send_v2_and_mark(
         int(u["user_id"]), "stuck_step_2",
         _fmt(cfg.STUCK_STEP_2, first_name=u.get("first_name") or "Friend"),
         kb_stuck_step_2(),
@@ -1115,7 +1108,7 @@ async def send_stuck_step_2_msg(u):
 
 
 async def send_stuck_step_3_msg(u):
-    await _send_v2_and_mark(
+    return await _send_v2_and_mark(
         int(u["user_id"]), "stuck_step_3",
         _fmt(cfg.STUCK_STEP_3, first_name=u.get("first_name") or "Friend"),
         kb_stuck_step_3(),
@@ -1123,7 +1116,7 @@ async def send_stuck_step_3_msg(u):
 
 
 async def send_m5_msg(u):
-    await _send_v2_and_mark(
+    return await _send_v2_and_mark(
         int(u["user_id"]), "m5",
         _fmt(cfg.M5_PROOF_NUDGE),
         kb_m5_proof(),
@@ -1131,7 +1124,7 @@ async def send_m5_msg(u):
 
 
 async def send_m6_msg(u):
-    await _send_v2_and_mark(
+    return await _send_v2_and_mark(
         int(u["user_id"]), "m6",
         _fmt(cfg.M6_SOFT_CHECKIN, first_name=u.get("first_name") or "Friend"),
         kb_m6_checkin(),
@@ -1139,7 +1132,7 @@ async def send_m6_msg(u):
 
 
 async def send_f1_msg(u):
-    await _send_v2_and_mark(
+    return await _send_v2_and_mark(
         int(u["user_id"]), "f1",
         _fmt(cfg.F1_CHECK, first_name=u.get("first_name") or "Friend"),
         kb_f1(),
@@ -1147,7 +1140,7 @@ async def send_f1_msg(u):
 
 
 async def send_f2_msg(u):
-    await _send_v2_and_mark(
+    return await _send_v2_and_mark(
         int(u["user_id"]), "f2",
         _fmt(cfg.F2_URGENCY, first_name=u.get("first_name") or "Friend"),
         kb_f2(),
@@ -1155,7 +1148,7 @@ async def send_f2_msg(u):
 
 
 async def send_f3_msg(u):
-    await _send_v2_and_mark(
+    return await _send_v2_and_mark(
         int(u["user_id"]), "f3",
         _fmt(cfg.F3_RAISING_STAKES, first_name=u.get("first_name") or "Friend"),
         kb_f3(),
@@ -1163,7 +1156,7 @@ async def send_f3_msg(u):
 
 
 async def send_f4_msg(u):
-    await _send_v2_and_mark(
+    return await _send_v2_and_mark(
         int(u["user_id"]), "f4",
         _fmt(cfg.F4_URGENCY_SPIKE, first_name=u.get("first_name") or "Friend"),
         kb_f4(),
@@ -1171,7 +1164,7 @@ async def send_f4_msg(u):
 
 
 async def send_f5_msg(u):
-    await _send_v2_and_mark(
+    return await _send_v2_and_mark(
         int(u["user_id"]), "f5",
         _fmt(cfg.F5_HARD_CLOSE, first_name=u.get("first_name") or "Friend"),
         kb_f5(),
@@ -1179,7 +1172,7 @@ async def send_f5_msg(u):
 
 
 async def send_f6_msg(u):
-    await _send_v2_and_mark(
+    return await _send_v2_and_mark(
         int(u["user_id"]), "f6",
         _fmt(cfg.F6_HELD_SLOT, first_name=u.get("first_name") or "Friend"),
         kb_f6(),
@@ -1187,7 +1180,7 @@ async def send_f6_msg(u):
 
 
 async def send_f7_msg(u):
-    await _send_v2_and_mark(
+    return await _send_v2_and_mark(
         int(u["user_id"]), "f7",
         _fmt(cfg.F7_NEW_BATCH, first_name=u.get("first_name") or "Friend"),
         kb_f7(),
@@ -1237,9 +1230,9 @@ async def process_v2_scheduled_messages():
             for name, pred, sender in V2_RULES:
                 try:
                     if pred(u, now):
-                        await sender(u)
-                        sent_this_cycle += 1
-                        await asyncio.sleep(0.2)  # gentle pacing within a user
+                        if await sender(u):
+                            sent_this_cycle += 1
+                            await asyncio.sleep(0.2)  # gentle pacing within a user
                         break  # one v2 message per user per tick
                 except Exception as e:
                     logger.error(f"[v2 sched] error evaluating {name} for {u.get('user_id')}: {e}")
@@ -1299,31 +1292,8 @@ async def process_follow_ups():
             
         logger.info(f"Follow-up cycle completed. Sent {total_sent} messages.")
             
-    except Exception:
-        # logger.exception prints the full traceback (file + line) so the
-        # next DB error is easy to trace.
-        logger.exception("Error processing follow-ups")
-
-#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Reachability reset ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-# group=-1 runs BEFORE the normal handlers and does not stop them, so /start,
-# button presses etc. still work exactly as before.
-@app.on_message(filters.private & filters.incoming, group=-1)
-async def _mark_reachable_on_message(_, m: Message):
-    if m.from_user:
-        try:
-            clear_unreachable(m.from_user.id)
-        except Exception as e:
-            logger.error(f"clear_unreachable failed for {m.from_user.id}: {e}")
-
-
-@app.on_callback_query(group=-1)
-async def _mark_reachable_on_callback(_, q: CallbackQuery):
-    if q.from_user:
-        try:
-            clear_unreachable(q.from_user.id)
-        except Exception as e:
-            logger.error(f"clear_unreachable failed for {q.from_user.id}: {e}")
+    except Exception as e:
+        logger.error(f"Error processing follow-ups: {e}")
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Main process ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1475,6 +1445,7 @@ async def start_command(_, m: Message):
     # Roland v2: route the user based on their current funnel state.
     # First-time /start → M1 + M2; returning users get the next step they're on.
     force_welcome = not already_onboarding(user_id)
+    set_unreachable(user_id, False)  # they just messaged us, so we can reach them again
     await route_v2_entry(user_id, first_name, force_welcome=force_welcome)
     update_onboarding_stage(user_id, "start_clicked")
     logger.info(f"User {user_id} routed via /start")
